@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Algo task quest</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Playwrite+VN:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sixtyfour+Convergence&display=swap");
+      body {
+        line-height: 1.6;
+        font-family: "Poppins", sans-serif;
+        font-weight: 400;
+        padding: 0 20px;
+        background-color: #000;
+      }
+      h1 {
+        /* background-color: aqua; */
+        text-align: center;
+        font-size: 20px;
+        color: green;
+      }
+      p,
+      h3 {
+        color: #ccc;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        color: rgb(12, 56, 87);
+        font-weight: 900;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+
+      hr {
+        border-bottom: 3px solid red !important;
+      }
+
+      @media print {
+        body {
+          font-size: 14px; /* Adjust font size for printing */
+        }
+
+        /* Hide elements you don't want to print */
+        button {
+          display: none; /* Hide the print button */
+        }
+
+        /* Remove default headers and footers in browsers */
+        @page {
+          margin: 0;
+          size: auto;
+        }
+
+        /* Hide the date and URL (typically in headers or footers) */
+        header,
+        footer {
+          display: none;
+        }
+      }
+    </style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body style="background-color: #000">
+    <h1>Algoo Inrerview Quest</h1>
+    <p>1) They may ask?</p>
+
+    <pre>
+i)Why did you use MongoDB in your assignment?
+
+MongoDB integrates well with Node.js using Mongoose, 
+and I'm comfortable working with it as part of the MERN stack. 
+Since the assignment allowed any database, 
+I felt MongoDB was a suitable choice for this use case.
+
+ii)If they ask: "Why not MySQL?"
+
+MySQL would also work. 
+I would prefer MySQL when the application has complex relationships,
+joins, or strong relational constraints. 
+For this assignment, the data is relatively 
+simple and document-based, so MongoDB was sufficient.
+    </pre>
+
+    <p>2) What is a REST API?</p>
+    <pre>
+REST stands for Representational State Transfer. 
+It is an architectural style for designing APIs where 
+resources are accessed using HTTP methods 
+such as GET, POST, PUT, PATCH, and DELETE
+    </pre>
+    <p>3) Explain the flow of your assignment.</p>
+    <pre>
+   The user enters their first name, last name, and date of birth in
+   React frontend. When the form is submitted, the frontend 
+   sends the data to the Node.js backend through the 
+   POST /user API. The backend validates the data, 
+   checks whether the user already exists, and calls the Dog 
+   API to get a random dog image. 
+   Then it stores the user information and the image URL in MongoDB. 
+   When the frontend requests GET /user, 
+   the backend retrieves the users and calculates the age from the 
+   stored date of birth before returning the response.
+</pre
+    >
+    <p>4) Why calculate age instead of storing it?</p>
+    <pre>
+Because age is a changing value, while date of birth is permanent. 
+If I stored age, it would become outdated over time. 
+So I stored the DOB and calculated the 
+current age when retrieving the user.
+</pre
+    >
+
+    <p>5) What is useState in React?</p>
+
+    <pre>
+  useState is a React Hook used to manage state inside a functional component. 
+  It returns the current state value and a function to update it. 
+  When the state is updated, React re-renders the component.
+
+  example:
+  const [name, setName] = useState("");
+
+  Here name is the state and setName updates it.
+    </pre>
+
+    <p>6) useEffect?</p>
+    <pre>
+   useEffect is used to perform side effects in a React component, such as API calls, 
+   subscriptions, timers, or interacting with external systems. 
+   In my application, I can use it to fetch users when the component initially loads.
+
+   useEffect(() => {
+  fetchUsers();
+}, []);
+    </pre>
+
+    <p>7) What is middleware in Express?</p>
+
+    <pre>
+
+    Middleware is a function that runs during the request-response cycle.
+    It can access the request and response objects 
+    and can either modify them, end the response, or 
+    pass control to the next middleware using next().
+ 
+    app.use(express.json());
+</pre
+    >
+    <p>8) Why did you use async/await?</p>
+    <pre>
+used async/await because database operations and API requests are asynchronous. 
+It makes asynchronous code easier to read and allows me 
+to handle errors cleanly using try-catch.
+
+   const dogResponse = await fetch(
+  "https://dog.ceo/api/breeds/image/random"
+);
+</pre
+    >
+
+    <p>9) HTTP status codes?</p>
+
+    <pre>
+   Why did you use 201, 400, 409 and 500 in your API?
+
+   201 means the resource was successfully created. 
+   400 is used when the client sends invalid or missing data. 
+   409 indicates a conflict, which I used when the user already exists. 
+   500 indicates an unexpected server-side error.
+</pre
+    >
+
+    <p>10) find() vs findOne()</p>
+
+    <pre>
+    find() returns an array of matching documents, 
+    while findOne() returns the first matching document or null 
+    if no document is found. In my assignment, I used findOne() to check whether 
+    a user already exists, and find() to retrieve the users.
+   </pre
+    >
+
+    <p>What is the difference between PUT and PATCH?"</p>
+    <pre>
+        PUT is generally used to completely replace or update a resource, 
+        whereas PATCH is used to partially update a resource. 
+        For example, if a user has firstName, lastName, and DOB, 
+        with PUT I would normally send the complete updated user data. 
+        With PATCH, I could update only the firstName without sending the other fields.
+
+        PUT:
+        in postman
+        PUT /user/123
+        {
+        "firstName": "Ankit",
+        "lastName": "Shinde",
+        "dob": "1998-05-10"
+        }   
+
+         PATCH:
+        in postman
+        PATCH /user/123
+       {
+        "firstName": "Rahul"
+        }
+        
+   </pre
+    >
+    <p>i) If they ask: "Which one did you use in your assignment?"</p>
+    <pre>
+        I used PUT for the update operation because my update endpoint expects 
+        the complete set of user fields—firstName, lastName, and DOB.
+
+        Remember this
+
+        PUT = complete update
+        PATCH = partial update
+    </pre>
+    <!-- Print button -->
+    <button onclick="window.print()">Print</button>
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="index.html" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item active">
+          <a class="page-link" href="index.html">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="js.html">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="react.html">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="Commands4.html">4</a>
+        </li>
+
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

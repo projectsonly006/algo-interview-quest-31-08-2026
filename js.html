@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>js</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Playwrite+VN:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sixtyfour+Convergence&display=swap");
+      body {
+        line-height: 1.6;
+        font-family: "Poppins", sans-serif;
+        font-weight: 400;
+        padding: 0 20px;
+        background-color: #000;
+      }
+      h1 {
+        /* background-color: aqua; */
+        text-align: center;
+        font-size: 20px;
+        color: green;
+      }
+      p,
+      h3 {
+        color: #ccc;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        color: rgb(12, 56, 87);
+        font-weight: 900;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+
+      hr {
+        border-bottom: 3px solid red !important;
+      }
+
+      @media print {
+        body {
+          font-size: 14px; /* Adjust font size for printing */
+        }
+
+        /* Hide elements you don't want to print */
+        button {
+          display: none; /* Hide the print button */
+        }
+
+        /* Remove default headers and footers in browsers */
+        @page {
+          margin: 0;
+          size: auto;
+        }
+
+        /* Hide the date and URL (typically in headers or footers) */
+        header,
+        footer {
+          display: none;
+        }
+      }
+    </style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body style="background-color: #000">
+    <h1>Algoo Inrerview Quest</h1>
+
+     <p> What is JS?</p>
+    <pre>
+JS is a single-threaded, non-blocking asynchronous concurrent language. 
+It is used as a client-side scripting language 
+as well as server-side using Node.js.
+    </pre>
+
+
+    <p> var let const difference?</p>
+
+    <pre>
+var is function-scoped & can be redeclared.
+let is block-scoped & can be reassigned.
+const is block-scoped cannot be reassigned after initalization.  
+</pre
+    >
+
+    <p>Diff between null undefined?</p>
+
+    <pre>
+null means you intentionally set the value to "nothing".
+
+example:
+
+let selectedUser = null;
+
+console.log(selectedUser); // null
+----------------------------------------------------------------------------
+
+undefined usually means a variable exists, but no value has been assigned.
+
+example:
+
+const user = {};
+
+console.log(user.age); // undefined
+
+    </pre>
+   
+
+
+    <p> Event Loop in JS?.</p>
+    <pre>
+As JS is single-threaded, 
+the event loop manages async tasks by queuing them after synchronous tasks are done.
+
+Example:
+console.log("1. Start");
+
+setTimeout(() => {
+  console.log("2. Inside setTimeout");
+}, 0);
+
+console.log("3. End");
+
+Output will be:
+1. Start
+3. End
+2. Inside setTimeout
+
+Explanation:
+console.log("1. Start") runs first — it's synchronous.
+setTimeout is asynchronous, so it's scheduled to run later.
+console.log("3. End") runs next.
+</pre
+    >
+    <p> Callback Function?</p>
+    <pre>
+A callback is a function passed as an argument to another function.
+This technique allows a function to call another function.
+A callback function can run after another function has finished.
+
+
+Example:
+function sayHi() {
+  console.log("Hi");
+}
+
+function greet(callback) {
+  callback();  // calling the passed-in function
+}
+
+greet(sayHi);
+
+Output:
+Hi
+
+sayHi is passed as a callback to greet.
+greet runs and calls sayHi using callback().
+sayHi then prints "Hi" to the console.
+</pre
+    >
+
+    <p> Promise in JS?</p>
+
+    <pre>
+A Promise is an object that represents the eventual completion (or failure) 
+of an asynchronous operation and its resulting value.
+
+const myPromise = new Promise((resolve, reject) => {
+  const success = true; // Try changing this to false
+
+  if (success) {
+    resolve("✅ Promise resolved!");
+  } else {
+    reject("❌ Promise rejected!");
+  }
+});
+
+myPromise
+  .then((message) => {
+    console.log("Then:", message);
+  })
+  .catch((error) => {
+    console.log("Catch:", error);
+  });
+
+  Or
+
+If you don’t want to use .then, use async await:
+async function run() {
+  try {
+    const message = await myPromise;
+    console.log("Then:", message);
+  } catch (error) {
+    console.log("Catch:", error);
+  }
+}
+
+run();
+
+Explanation:
+new Promise((resolve, reject) => {...}) creates a new promise.
+Inside the promise, based on success, it calls resolve() or reject().
+.then() handles the success result.
+.catch() handles any errors or rejection.
+
+Promises with Async to Call API
+
+
+async function fetchData() {
+  const res = await fetch('/api');
+  const data = await res.json();
+}
+    </pre>
+
+    <p> Event Bubbling & Event Delegation?</p>
+    <pre>
+   Event Bubbling: Events move from child to parent.
+
+   Example: Event Bubbling
+
+    < div id="parent">
+    < button id="child">Click me< /button>
+    </ div>
+
+
+    &lt; script &gt;
+    document.getElementById("parent").addEventListener("click", () => {
+        console.log("Parent clicked");
+    });
+
+    document.getElementById("child").addEventListener("click", () => {
+        console.log("Child clicked");
+    });
+    &lt;/ script &gt;
+
+
+    Event Delegation: Attach one event handler to the parent to manage the child.
+
+    Example: Event Delegation
+
+    < ul id="list">
+    < li>Item 1</ li>
+    < li>Item 2</ li>
+    < li>Item 3</ li>
+    < /ul>
+
+    &lt; script &gt;
+
+
+    document.getElementById("list").addEventListener("click", (event) => {
+        if (event.target.tagName === "LI") {
+        console.log("Clicked on:", event.target.textContent);
+        }
+    });
+ 
+    &lt;/ script &gt;
+    </pre>
+
+    <p> Closures?</p>
+
+    <pre>
+
+A closure is a function that remembers the variables from its outer scope, 
+even after that outer function has finished executing.
+
+    Example:
+    function outer() {
+    let count = 0;
+
+    function inner() {
+        count++;
+        console.log("Count is:", count);
+    }
+
+    return inner;
+    }
+
+    const counter = outer();  // outer() runs and returns inner()
+    counter(); // Count is: 1
+    counter(); // Count is: 2
+    counter(); // Count is: 3
+    // closure — a function holding on to a 
+    local variable after the outer function has finished.
+</pre
+    >
+    <p> js scopes</p>
+    <pre>
+i. Local Variable
+A local variable is declared inside a function and can only be used inside that function.
+
+    Example:
+
+    function greet() {
+    let name = "Rahul";
+    console.log(name);
+    }
+
+    greet(); // Rahul
+
+    console.log(name); // Error
+
+    Here, name is local to the greet() function.
+
+
+ii. Global Variable
+A global variable is declared outside a function and 
+can be accessed from different parts of the program.
+
+    Example:
+
+    let name = "Rahul";
+
+    function greet() {
+    console.log(name);
+    }
+
+    greet(); // Rahul
+    console.log(name); // Rahul
+
+
+</pre
+    >
+
+    <p> What is hoisting in JavaScript?</p>
+
+    <pre>
+Hoisting in Js is behavior of processing declarations before executing the code. 
+
+    greet(); // output hello
+
+    function greet() {
+    console.log("Hello");
+    }
+
+    Function declarations are fully hoisted, 
+    ----------------------------------------------------------------------------
+    example with var
+
+    var name;
+
+    console.log(name); // undefined
+
+    var variables are hoisted with an initial value of undefined; 
+    ----------------------------------------------------------------------------
+
+    name = "Rahul";
+
+    console.log(name); // This gives a ReferenceError
+
+    let name = "Rahul";
+
+    let and const are hoisted but remain in the 
+    Temporal Dead Zone (TDZ) until their declaration is reached.
+
+</pre
+    >
+
+    <p> Destructuring in JavaScript</p>
+
+    <pre>
+Destructuring is a JavaScript feature that allows us to extract values from 
+arrays or properties from objects and assign them to variables in a concise way.
+
+    example
+
+    const user = {
+    name: "Rahul",
+    age: 25,
+    city: "Mumbai"
+    };
+
+    const { name, age, city } = user;
+
+    console.log(name); // Rahul
+    console.log(age);  // 25
+    console.log(city); // Mumbai
+
+    Instead of:
+
+    const name = user.name;
+    const age = user.age;
+    const city = user.city;
+
+    Rename variables:
+
+    const user = {
+    name: "Rahul",
+    age: 25
+    };
+
+    const { name: userName, age: userAge } = user;
+
+    console.log(userName); // Rahul
+    console.log(userAge);  // 25
+   </pre
+    >
+
+    <p>Higher-order functions?</p>
+
+    <pre>
+Functions that takes other functions as arguments
+
+example:
+
+const numbers = [1, 2, 3, 4];
+
+const doubled = numbers.map(x => x * 2);
+
+console.log(doubled); // [2, 4, 6, 8]
+
+Here, map is a higher-order function because 
+it accepts another function (x => x * 2) as an argument.
+
+    </pre>
+
+    <!-- Print button -->
+    <button onclick="window.print()">Print</button>
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="index.html" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="index.html">1</a></li>
+        <li class="page-item active">
+          <a class="page-link" href="js.html">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="react.html">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="Commands4.html">4</a>
+        </li>
+
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
