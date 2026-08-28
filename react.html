@@ -261,6 +261,7 @@ const About = lazy(() => import("./About"));
 
 function App() {
   return (
+    // Suspense tells React: "While this component is loading, show this other thing instead."
     < Suspense fallback={< p >Loading...< /p>}>
       < About />
     < /Suspense>
@@ -273,7 +274,111 @@ Here, About is loaded only when React needs it.
 
     </pre>
 
-  
+  <p>Controlled vs Uncontrolled in reactjs</p>
+
+  <pre>
+A controlled component has its form value managed by React state, 
+whereas an uncontrolled component lets 
+the DOM manage its value and React accesses it using refs.
+  </pre>
+
+  <pre>
+Controlled Component:
+import React, { useState } from "react";
+    
+function ControlledComponent() {
+const [name, setName] = useState("");
+    
+const handleChange = (event) => {
+  setName(event.target.value); // Update the state as the input changes
+};
+    
+  return (
+        < div>
+          < input
+            type="text"
+            value={name} // The value is controlled by the state
+            onChange={handleChange} // React updates state on input change
+          />
+          < p>Value: {name}< /p>
+        < /div>
+      );
+  }
+    
+export default ControlledComponent;
+  </pre>
+
+  <pre>
+Uncontrolled Component:
+import React, { useRef } from "react";
+
+function UncontrolledComponent() {
+  const nameInput = useRef();
+
+  const handleSubmit = () => {
+    alert("Value: " + nameInput.current.value); // Access the input value directly from the DOM
+  };
+
+  return (
+    < div>
+      < input type="text" ref={nameInput} />
+      < button onClick={handleSubmit}>Submit< /button>
+    < /div>
+  );
+}
+
+export default UncontrolledComponent;
+
+
+  </pre>
+
+  <p>React memo?</p>
+ <pre>
+<img src="react-memo.png" style="width: 950px;" alt="">
+ </pre>
+
+ <p>useMemo</p>
+
+ <pre>
+  useMemo → memoizes a value
+
+  useMemo
+   ↓
+  Value
+    ↓
+  "Remember this result"
+
+ </pre>
+
+ <pre>
+<img src="useMemo.png" style="width: 900px;" alt="">
+ </pre>
+
+ <p>useCallback</p>
+ <pre>
+  useCallback
+   ↓
+  Function
+   ↓
+  "Remember this function"
+ </pre>
+
+ <pre>
+<img src="useCallback.png" style="width: 900px;" alt="">
+ </pre>
+
+ <p>What is a custom Hook?</p>
+
+ <pre>
+  A custom Hook is simply a JavaScript function 
+  that uses React Hooks and lets you reuse 
+  logic between components.
+ </pre>
+
+ <pre>
+<img src="custom-hook.png" style="width: 900px;" alt="">
+ </pre>
+
 
     <!-- Print button -->
     <button onclick="window.print()">Print</button>
@@ -293,7 +398,10 @@ Here, About is loaded only when React needs it.
           <a class="page-link" href="react.html">3</a>
         </li>
         <li class="page-item">
-          <a class="page-link" href="Commands4.html">4</a>
+          <a class="page-link" href="code.html">4</a>
+        </li>
+         <li class="page-item">
+          <a class="page-link" href="mongodb.html">5</a>
         </li>
 
         <li class="page-item">

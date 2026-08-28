@@ -198,39 +198,39 @@ to handle errors cleanly using try-catch.
 
     <p>What is the difference between PUT and PATCH?"</p>
     <pre>
-        PUT is generally used to completely replace or update a resource, 
-        whereas PATCH is used to partially update a resource. 
-        For example, if a user has firstName, lastName, and DOB, 
-        with PUT I would normally send the complete updated user data. 
-        With PATCH, I could update only the firstName without sending the other fields.
+PUT is generally used to completely replace or update a resource, 
+whereas PATCH is used to partially update a resource. 
+For example, if a user has firstName, lastName, and DOB, 
+with PUT I would normally send the complete updated user data. 
+With PATCH, I could update only the firstName without sending the other fields.
 
-        PUT:
-        in postman
-        PUT /user/123
-        {
-        "firstName": "Ankit",
-        "lastName": "Shinde",
-        "dob": "1998-05-10"
-        }   
+PUT:
+in postman
+  PUT /user/123
+  {
+    "firstName": "Ankit",
+     "lastName": "Shinde",
+      "dob": "1998-05-10"
+  }   
 
-         PATCH:
-        in postman
-        PATCH /user/123
-       {
-        "firstName": "Rahul"
-        }
+  PATCH:
+in postman
+   PATCH /user/123
+    {
+      "firstName": "Rahul"
+    }
         
    </pre
     >
     <p>i) If they ask: "Which one did you use in your assignment?"</p>
     <pre>
-        I used PUT for the update operation because my update endpoint expects 
-        the complete set of user fields—firstName, lastName, and DOB.
+I used PUT for the update operation because my update endpoint expects 
+the complete set of user fields—firstName, lastName, and DOB.
 
-        Remember this
+Remember this
 
-        PUT = complete update
-        PATCH = partial update
+PUT = complete update
+PATCH = partial update
     </pre>
     <!-- Print button -->
     <button onclick="window.print()">Print</button>
@@ -252,7 +252,10 @@ to handle errors cleanly using try-catch.
           <a class="page-link" href="react.html">3</a>
         </li>
         <li class="page-item">
-          <a class="page-link" href="Commands4.html">4</a>
+          <a class="page-link" href="code.html">4</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="mongodb.html">5</a>
         </li>
 
         <li class="page-item">

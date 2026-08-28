@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Only code</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Playwrite+VN:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sixtyfour+Convergence&display=swap");
+      body {
+        line-height: 1.6;
+        font-family: "Poppins", sans-serif;
+        font-weight: 400;
+        padding: 0 20px;
+        background-color: #000;
+      }
+      h1 {
+        /* background-color: aqua; */
+        text-align: center;
+        font-size: 20px;
+        color: green;
+      }
+      p,
+      h3 {
+        color: #ccc;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        color: rgb(12, 56, 87);
+        font-weight: 900;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+
+      hr {
+        border-bottom: 3px solid red !important;
+      }
+
+      @media print {
+        body {
+          font-size: 14px; /* Adjust font size for printing */
+        }
+
+        /* Hide elements you don't want to print */
+        button {
+          display: none; /* Hide the print button */
+        }
+
+        /* Remove default headers and footers in browsers */
+        @page {
+          margin: 0;
+          size: auto;
+        }
+
+        /* Hide the date and URL (typically in headers or footers) */
+        header,
+        footer {
+          display: none;
+        }
+      }
+    </style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body style="background-color: #000">
+    <h1>Algoo Inrerview Quest</h1>
+
+    <p>What is MongoDB and why would you use it instead of MySQL?</p>
+    <pre>
+MongoDB is a NoSQL database that stores data in JSON-like documents instead of tables and rows.
+MySQL is a relational SQL database that stores data in tables with rows and columns.
+
+
+I would choose MongoDB when:
+
+The data structure changes frequently.
+I need a flexible schema.
+I have large amounts of unstructured or semi-structured data.
+
+MYSQL DATA
+
+Users Table
+----------------
+id | name | age
+1  | John | 25
+
+
+MongoDB:
+
+{
+  _id: 1,
+  name: "John",
+  age: 25
+}
+
+    </pre>
+
+    <p>What is BSON?</p>
+
+    <pre>
+MongoDB stores documents in BSON format.
+BSON stands for Binary JSON.
+
+JSON:
+
+{
+  "name": "Rohan",
+  "age": 28
+}
+
+MongoDB's  _id is commonly an ObjectId
+ObjectId() is a BSON-specific type.
+
+{
+  _id: ObjectId("6a91a57eb13baa0f5af0b430"),
+  name: "Rohan",
+  age: 28
+}
+    </pre>
+
+    <p>What is a document and a collection in MongoDB?</p>
+
+    <pre>
+A document is a single record in MongoDB,
+document is similar to a row in MySQL. 
+
+Collection is a group of documents. 
+A collection is similar to a table,
+
+MySQL:                            MongoDB:
+Database → Table → Row            Database → Collection → Document
+    </pre>
+
+    <p>What is Mongoose?</p>
+    <pre>
+Mongoose is an ODM (Object Data Modeling) library for MongoDB and Node.js.
+Mongoose makes it easier for your Node.js/Express application to work with MongoDB.
+
+with mongoose we can create a model
+const User = mongoose.model("User", userSchema);
+
+Mongoose gives you features like:
+
+Schema → define the structure of documents
+Validation → required fields, min/max, etc.
+Models → interact with collections
+Middleware/hooks → pre, post
+    </pre>
+
+    <p>what is schema?</p>
+
+    <pre>
+
+A schema defines the structure, data types, and validation rules for documents
+
+A schema defines the structure and rules for your data.
+schema tells your application:
+
+What fields a document should have
+What type each field should be
+Which fields are required
+Validation rules
+Default values, etc.
+
+This schema says:
+
+User
+ ├── name  → String → required
+ ├── age   → Number → required
+ └── email → String → required + unique
+
+ you want to store users:
+
+ const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  age: {
+    type: Number,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  }
+});
+
+you create a model from the schema:
+
+const User = mongoose.model("User", userSchema);
+    </pre>
+
+    <p>
+      What is the difference between updateOne(), updateMany(), and
+      replaceOne()?
+    </p>
+
+    <pre>
+updateOne()
+Updates only the first matching document.
+
+db.users.updateOne(
+  { name: "John" },
+  { $set: { age: 30 } }
+);
+
+Only one John will be updated.
+
+------------------------------------------------------------------------------
+
+updateMany()
+Updates all matching documents.
+
+db.users.updateMany(
+  { city: "Mumbai" },
+  { $set: { country: "India" } }
+);
+
+All users from Mumbai will be updated.
+
+----------------------------------------------------------------------------
+
+replaceOne()
+Replaces the entire document with the new document.
+
+db.users.replaceOne(
+  { name: "John" },
+  { name: "John", age: 30, city: "Mumbai" }
+);
+
+The old document is completely replaced. 
+Fields that aren't included in the new document are removed.
+
+
+----------------------------------------------------------------------------
+Method	What it does
+updateOne()	Updates one matching document
+updateMany()	Updates all matching documents
+replaceOne()	Replaces the complete document
+    </pre>
+
+    <p>How to create collections in mongodb?</p>
+    <pre>
+In MongoDB, a collection can be created explicitly using db.createCollection(), 
+or MongoDB can create it automatically when we insert the first document.
+
+db.users.insertOne({
+  name: "John",
+  age: 25
+});
+
+
+db.users.find() or db.users.findOne({name: "John"})
+
+[
+  { _id: ObjectId('6a91a3d7b13baa0f5af0b42f'), name: 'John', age: 25 }
+]
+
+or
+
+db.createCollection("users");
+
+show collections
+
+test> db.getCollectionNames()
+[ 'users' ]
+
+users
+products
+orders
+
+Get a specific collection
+
+db.users
+
+db.users.find() → shows documents/data inside users
+test> db.users.find()
+[
+  { _id: ObjectId('6a91a3d7b13baa0f5af0b42f'), name: 'John', age: 25 }
+]
+test>
+    </pre>
+
+    <p>How do skip() and limit() work?</p>
+    <pre>
+check how many data u have
+test> db.users.find()
+[
+  { _id: ObjectId('6a91a3d7b13baa0f5af0b42f'), name: 'John', age: 25 },
+  { _id: ObjectId('6a91a57eb13baa0f5af0b430'), name: 'rohan', age: 28 },
+  { _id: ObjectId('6a91a589b13baa0f5af0b431'), name: 'sam', age: 20 },
+  {
+    _id: ObjectId('6a91a5a9b13baa0f5af0b432'),
+    name: 'samuel',
+    age: 30
+  }
+]      
+limit() → how many documents you want
+
+test> db.users.find().limit(2)
+[
+  { _id: ObjectId('6a91a3d7b13baa0f5af0b42f'), name: 'John', age: 25 },
+  { _id: ObjectId('6a91a57eb13baa0f5af0b430'), name: 'rohan', age: 28 }
+]
+
+skip() → how many documents you want to skip
+
+test> db.users.find().skip(2)
+[
+  { _id: ObjectId('6a91a589b13baa0f5af0b431'), name: 'sam', age: 20 },
+  {
+    _id: ObjectId('6a91a5a9b13baa0f5af0b432'),
+    name: 'samuel',
+    age: 30
+  }
+]
+</pre
+    >
+
+    <p>Count users in db</p>
+
+    <pre>
+db.users.countDocuments()
+4
+</pre
+    >
+
+    <p>What is projection?</p>
+    <pre>
+If you only want age:
+
+test> db.users.find( {}, { age: 1 } )
+[
+  { _id: ObjectId('6a91a3d7b13baa0f5af0b42f'), age: 25 },
+  { _id: ObjectId('6a91a57eb13baa0f5af0b430'), age: 28 },
+  { _id: ObjectId('6a91a589b13baa0f5af0b431'), age: 20 },
+  { _id: ObjectId('6a91a5a9b13baa0f5af0b432'), age: 30 }
+]
+test>
+</pre
+    >
+
+    <!-- Print button -->
+    <button onclick="window.print()">Print</button>
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="index.html" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="index.html">1</a></li>
+        <li class="page-item">
+          <a class="page-link" href="js.html">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="react.html">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="code.html">4</a>
+        </li>
+
+        <li class="page-item active">
+          <a class="page-link" href="mongodb.html">5</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
